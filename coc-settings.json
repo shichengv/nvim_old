@@ -1,0 +1,13 @@
+{
+
+    "languageserver": {
+        "sql": {
+            "module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
+            "args": ["up", "--method", "node-ipc"],
+            "filetypes": ["sql", "mysql"]
+        }
+
+    },
+
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.3/clangd_15.0.3/bin/clangd"
+}

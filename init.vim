@@ -285,17 +285,33 @@ set list lcs=tab:\|\ "提供的一个可视化的缩进 For code indented with t
 
 "=============Coc.nvim================="
 "TAB 补全
+
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -350,14 +366,13 @@ nmap <leader>f  <Plug>(coc-format-selected)
 "coc.nvim
 let g:coc_global_extensions = [
 	\ 'coc-highlight',
-	\ 'coc-sh',
 	\ 'coc-syntax',
 	\ 'coc-vimlsp',
 	\ 'coc-word',
-	\ 'coc-snippets',
 	\ 'coc-json',
+    	\ 'coc-pyright',
+    	\ 'coc-sh',
 	\ 'coc-sumneko-lua',
-	\ 'coc-pyright',
 	\ 'coc-clangd',]
 
 
