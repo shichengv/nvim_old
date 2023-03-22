@@ -1,5 +1,6 @@
 {
 
+    "suggest.noselect": true,
     "languageserver": {
         "sql": {
             "module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
